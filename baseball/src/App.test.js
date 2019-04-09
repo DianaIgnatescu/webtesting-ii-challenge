@@ -8,9 +8,11 @@ import App from './App';
 afterEach(rtl.cleanup);
 
 describe('<App />', () => {
+describe('App component', () => {
   it('should render without crashing', () => {
     rtl.render(<App />);
   });
+});
 
   it('should render Display component', () => {
     const component = rtl.render(<Display balls={0} strikes={0} />);
