@@ -37,5 +37,44 @@ describe('Dashboard component', () => {
     const component = rtl.render(<Dashboard />);
     expect(component).toBeTruthy();
   });
+  it('should render ball button with expected attributes', () => {
+    const dashboardComponent = rtl.render(<Dashboard />);
+    const ballButton = dashboardComponent.getByTestId('ball-button');
+    const isButton = ballButton.matches('button');
+    const isLabeledBall = ballButton.textContent === 'Ball';
+    expect(isButton).toBe(true);
+    expect(isLabeledBall).toBe(true);
+    // expect(dashboardComponent.getByText(/ball/i));
+  });
+
+  it('should render strike button with expected attributes', () => {
+    const dashboardComponent = rtl.render(<Dashboard />);
+    const strikeButton = dashboardComponent.getByTestId('strike-button');
+    const isButton = strikeButton.matches('button');
+    const isLabeledStrike = strikeButton.textContent === 'Strike';
+    expect(isButton).toBe(true);
+    expect(isLabeledStrike).toBe(true);
+    // expect(dashboardComponent.getByText(/strike/i));
+  });
+
+  it('should render foul button with expected attributes', () => {
+    const dashboardComponent = rtl.render(<Dashboard/>);
+    const foulButton = dashboardComponent.getByTestId('foul-button');
+    const isButton = foulButton.matches('button');
+    const isLabeledFoul = foulButton.textContent === 'Foul';
+    expect(isButton).toBe(true);
+    expect(isLabeledFoul).toBe(true);
+  });
+
+  it('should render hit button with expected attributes', () => {
+    const dashboardComponent = rtl.render(<Dashboard />);
+    const hitButton = dashboardComponent.getByTestId('hit-button');
+    const isButton = hitButton.matches('button');
+    const isLabeledHit = hitButton.textContent === 'Hit';
+    expect(isButton).toBe(true);
+    expect(isLabeledHit).toBe(true);
+    // expect(dashboardComponent.getByText(/hit/i));
+  });
+});
 });
 
