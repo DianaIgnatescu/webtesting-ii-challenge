@@ -76,5 +76,62 @@ describe('Dashboard component', () => {
     // expect(dashboardComponent.getByText(/hit/i));
   });
 });
+
+xdescribe('Integration', () => {
+  it('should reset balls and strikes when hit is clicked', () => {
+    const dashboardComponent = rtl.render(<Dashboard />);
+    const displayComponent = rtl.render(<Display balls={0} strikes={0}/>);
+    const hitButton = dashboardComponent.getByTestId('hit-button');
+    rtl.fireEvent.click(hitButton);
+    const strikeCount = displayComponent.getByTestId('strike-count');
+    const expectedStrikes = 'Strikes: 0';
+    expect(strikeCount).toHaveTextContent(expectedStrikes);
+    const ballCount = displayComponent.getByTestId('ball-count');
+    const expectedBalls = 'Balls: 0';
+    expect(ballCount).toHaveTextContent(expectedBalls);
+  });
+
+  it('should update "Display" with "Balls: 1" when ball button is clicked once', () => {
+    const dashboardComponent = rtl.render(<Dashboard />);
+    const displayComponent = rtl.render(<Display balls={1} strikes={1} />);
+    const ballButton = dashboardComponent.getByTestId('ball-button');
+    rtl.fireEvent.click(ballButton);
+    const ballCount = displayComponent.getByTestId('ball-count');
+    const expected = 'Balls: 2';
+    expect(ballCount).toHaveTextContent(expected);
+  });
+
+  it('should reset the ball count to 0 when the player reaches 4 balls', () => {
+    const dashboardComponent = rtl.render(<Dashboard />);
+    const displayComponent = rtl.render(<Display balls={0} strikes={0}/>);
+    const ballButton = dashboardComponent.getByTestId('ball-button');
+    rtl.fireEvent.click(ballButton);
+    rtl.fireEvent.click(ballButton);
+    rtl.fireEvent.click(ballButton);
+    const ballCount = displayComponent.getByTestId('ball-count');
+    const expected = 'Balls: 0';
+    expect(ballCount).toHaveTextContent(expected);
+  });
+
+  it('should update "Display" with "Strikes: 1" when strike button is clicked once', () => {
+    const dashboardComponent = rtl.render(<Dashboard />);
+    const displayComponent = rtl.render(<Display balls={1} strikes={1} />);
+    const strikeButton = dashboardComponent.getByTestId('strike-button');
+    rtl.fireEvent.click(strikeButton);
+    const strikeCount = displayComponent.getByTestId('strike-count');
+    const expected = 'Strikes: 1';
+    expect(strikeCount).toHaveTextContent(expected);
+  });
+
+  it('should reset the strike count to 0 when the player reaches 3 strikes', () => {
+    const dashboardComponent = rtl.render(<Dashboard />);
+    const displayComponent = rtl.render(<Display balls={1} strikes={0}/>);
+    const strikeButton = dashboardComponent.getByTestId('strike-button');
+    rtl.fireEvent.click(strikeButton);
+    rtl.fireEvent.click(strikeButton);
+    const strikeCount = displayComponent.getByTestId('strike-count');
+    const expected = 'Strikes: 0';
+    expect(strikeCount).toHaveTextContent(expected);
+  });
 });
 
