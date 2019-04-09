@@ -12,4 +12,13 @@ describe('<App />', () => {
     rtl.render(<App />);
   });
 
+  it('should render Display component', () => {
+    const component = rtl.render(<Display balls={0} strikes={0} />);
+    expect(component).toBeTruthy();
+  });
+  it('should render Dashboard component', () => {
+    const component = rtl.render(<Dashboard />);
+    expect(component).toBeTruthy();
+  });
 });
+
